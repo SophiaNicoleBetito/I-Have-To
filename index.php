@@ -3,7 +3,20 @@
 	$errors = "";
 
 	// connect to database
-	$db = mysqli_connect("localhost", "root", "", "todo_app");
+	$serverName = "localhost";
+    $userName = "root";
+    $password = "";
+    $dbName = "todo_app";
+
+    $con = mysqli_connect($serverName, $userName, $password, $dbName);
+    
+    // checks if successfully connected to the database
+    if(mysqli_connect_errno()) {
+        echo "failed to connect!";
+        exit();
+    }
+
+    echo "Connection Success!";
 
 	// insert a quote if submit button is clicked
 	if (isset($_POST['submit'])) {
@@ -11,8 +24,8 @@
 			$errors = "You must fill in the task";
 		}else{
 			$task = $_POST['task'];
-			$sql = "INSERT INTO tasks (task) VALUES ('$task')";
-			mysqli_query($db, $sql);
+			$sql = "INSERT INTO task (task) VALUES ('$task')";
+			mysqli_query($con, $sql);
 			header('location: index.php');
 		}
 	}
@@ -59,7 +72,7 @@
             <tbody>
                 <?php 
                     // select all tasks if page is visited or refreshed
-                    $list = mysqli_query($db, "SELECT * FROM list");
+                    $list = mysqli_query($con, "SELECT * FROM list");
 
                     $i = 1; while ($row = mysqli_fetch_array($list)) { ?>
                     <tr>
