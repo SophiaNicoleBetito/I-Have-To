@@ -1,48 +1,7 @@
-<?php 
-    // initialize errors variable
-	$errors = "";
-
-	// connect to database
-	$serverName = "localhost";
-    $userName = "root";
-    $password = "";
-    $dbName = "todo_app";
-
-    $con = mysqli_connect($serverName, $userName, $password, $dbName);
-    
-    // checks if successfully connected to the database
-    if(mysqli_connect_errno()) {
-        echo "failed to connect!";
-        exit();
-    }
-
-    echo "Connection Success!";
-
-	// insert a quote if submit button is clicked
-	if (isset($_POST['submit'])) {
-		if (empty($_POST['task'])) {
-			$errors = "You must fill in the task";
-		}else{
-			$task = $_POST['task'];
-			$sql = "INSERT INTO task (task) VALUES ('$task')";
-			mysqli_query($con, $sql);
-			header('location: index.php');
-		}
-	}
-
-    // delete task
-    if (isset($_GET['del_task'])) {
-        $id = $_GET['del_task'];
-
-        mysqli_query($db, "DELETE FROM tasks WHERE id=$id");
-        header('location: index.php');
-    }
-?>
-
-
 <!DOCTYPE html>
 <html>
     <head>
+        <?php include "db.php"; ?>
         <title>ToDo List Application PHP and MySQL</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
@@ -63,7 +22,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>N</th>
+                    <th>No.</th>
                     <th>Tasks</th>
                     <th style="width: 60px;">Action</th>
                 </tr>
