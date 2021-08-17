@@ -1,35 +1,76 @@
+<?php 
+    // initialize errors variable
+	$errors = "";
+
+	// connect to database
+	$db = mysqli_connect("localhost", "root", "", "todo_app");
+
+	// insert a quote if submit button is clicked
+	if (isset($_POST['submit'])) {
+		if (empty($_POST['task'])) {
+			$errors = "You must fill in the task";
+		}else{
+			$task = $_POST['task'];
+			$sql = "INSERT INTO tasks (task) VALUES ('$task')";
+			mysqli_query($db, $sql);
+			header('location: index.php');
+		}
+	}
+
+    // delete task
+    if (isset($_GET['del_task'])) {
+        $id = $_GET['del_task'];
+
+        mysqli_query($db, "DELETE FROM tasks WHERE id=$id");
+        header('location: index.php');
+    }
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title> I Have To ... </title>
-        <link rel="stylesheet" href = "style.css"/>
+        <title>ToDo List Application PHP and MySQL</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
     <body>
-        <div class="form">
-            <form action = "javascript:void(0);" method = "POST" onsubmit = "app.Add()" action = "index.php"> 
-              <input type = "text" id = "add-todo" placeholder = "Thing To-Do">
-              <input type = "submit" value = "Add" class = "btn btn-primary">
-            </form>
-            <p>You Have: </p>
-            <p id="counter"></p>
-      
-            <table>
-            <tr class="to-do">
-                <th><h3>To-Do:</h3></th>
-            </tr>
-                <tbody id="tasks">
-                </tbody>
-            </table>
+        <div class="heading">
+            <h2 style="font-style: 'Hervetica';">ToDo List Application PHP and MySQL database</h2>
         </div>
-      
-        <div id="edit-box" role="aria-hidden">
-            <form action="javascript:void(0);" method="POST" id="save-edit">
-              <input type="text" id="edit-todo">
-              <input type="submit" value="Save" class="btn btn-success"/> <a onclick="CloseInput()" aria-label="Close">&#10006;</a>
-            </form>
-        </div>
-    </body>
+        <form method="post" action="index.php" class="input_form">
+            <?php if (isset($errors)) { ?>
+                <p><?php echo $errors; ?></p>
+            <?php } ?>
 
-    <script src="script.js"></script>
+            <input type="text" name="task" class="task_input">
+            <button type="submit" name="submit" id="add_btn" class="add_btn">Add Task</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>N</th>
+                    <th>Tasks</th>
+                    <th style="width: 60px;">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php 
+                    // select all tasks if page is visited or refreshed
+                    $list = mysqli_query($db, "SELECT * FROM list");
+
+                    $i = 1; while ($row = mysqli_fetch_array($list)) { ?>
+                    <tr>
+                        <td> <?php echo $i; ?> </td>
+                        <td class="task"> <?php echo $row['task']; ?> </td>
+                        <td class="delete"> 
+                            <a href="index.php?del_task=<?php echo $row['id'] ?>">x</a> 
+                        </td>
+                    </tr>
+                <?php $i++; } ?>	
+            </tbody>
+        </table>
+    </body>
 </html>
