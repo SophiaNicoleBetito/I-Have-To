@@ -38,7 +38,10 @@
                         <td> <?php echo $i; ?> </td>
                         <td class="task"> <?php echo $row['task']; ?> </td>
                         <td class="delete"> 
-                            <a href="index.php?del_task=<?php echo $row['id'] ?>">x</a> 
+                            <a href="index.php?del_task=<?php echo $row['id'] ?>"> x </a> 
+                        </td>
+                        <td class="edit_task"> 
+                            <a href="index.php?edit_task=<?php echo $row['id'] ?>"> edit </a> 
                         </td>
                     </tr>
                 <?php $i++; } ?>	
