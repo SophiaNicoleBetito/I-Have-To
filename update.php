@@ -17,7 +17,7 @@
             <?php } ?>
 
             <input type="text" name="task" class="task_input">
-            <button type="submit" name="submit" id="add_btn" class="add_btn">Update Task</button>
+            <button type="submit" name="submit" id="add_btn" class="add_btn">Add Task</button>
         </form>
 
         <table style="text-align:center;">
@@ -44,13 +44,13 @@
 
                         <!--Edit button-->
                         <td> 
-                            <a href="update.php?edit_task=<?php echo $row['id'] ?>" >
+                            <a href="index.php?edit_task=<?php echo $row['id'] ?>" >
                             <button type="submit" name="submit" id="add_btn" class="add_btn"> Edit </button> </a> 
                         </td>
                         
                         <!--Delete button-->
                         <td> 
-                            <a href="index.php?del_task=<?php echo $row['id'] ?>"> 
+                            <a href="update.php?del_task=<?php echo $row['id'] ?>"> 
                             <button type="submit" name="submit" id="add_btn" class="add_btn"> Delete </button> </a> 
                         </td>
                     </tr>
