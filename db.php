@@ -9,7 +9,9 @@
     $db = "todo";
 
     $con = mysqli_connect($serverName, $userName, $password, $db);
-    
+	$update = FALSE;
+    $task = "";
+
     // checks if successfully connected to the database
     if(mysqli_connect_errno()) {
         echo "failed to connect!";
@@ -29,20 +31,22 @@
 	}	
 
     // delete task
-    if (isset($_GET['del_task'])) {
-        $id = $_GET['del_task'];
+    if (isset($_GET['del'])) {
+        $id = $_GET['del'];
 
-        mysqli_query($con, "DELETE FROM list WHERE id = $id");
+        mysqli_query($con, "DELETE FROM list WHERE id=$id");
         header('location: index.php');
     }
 
-    // edit task
-    if (isset($_GET['edit_task'])) {
-        $id = $_GET['id'];
-        $result = $mysqli
+	// edit task
+    if (isset($_GET['edit'])) {
+        $id = $_GET['edit'];
+		$update = TRUE;
+        $result = mysqli_query($con, "SELECT * FROM list WHERE id=$id");
+		
+		
+		$row = $result -> fetch_array();
+		$task = $row['task'];
 
-        mysqli_query($con, "SELECT * FROM list WHERE id = $id");
-        header('location: index.php');
     }
-
 ?>
