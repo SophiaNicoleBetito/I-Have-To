@@ -10,23 +10,28 @@
         <div class="heading">
             <h2 style="font-style: 'Hervetica';">ToDo List Application PHP and MySQL database</h2>
         </div>
-        
         <form method="post" action="index.php" class="input_form">
             <?php if (isset($errors)) { ?>
                 <p><?php echo $errors; ?></p>
             <?php } ?>
 
-            <input type="text" name="task" class="task_input">
-            <button type="submit" name="submit" id="add_btn" class="add_btn">Update Task</button>
+
+            <?php if ($update == true): ?>
+                <input type="text" name="task" class="task_input" value = "<?php echo $task; ?>">
+                <button type="submit" name="submit" id="add_btn" class="add_btn"> Update </button>
+
+            <?php else: ?>
+                <input type="text" name="task" class="task_input" value = "<?php echo $task; ?>" placeholder = "Add Task">
+                <button type="submit" name="submit" id="add_btn" class="add_btn"> Save </button>
+            <?php endif; ?>
         </form>
 
-        <table style="text-align:center;">
+        <table>
             <thead>
                 <tr>
                     <th>No.</th>
                     <th>Tasks</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th style="width: 60px;">Action</th>
                 </tr>
             </thead>
 
@@ -37,21 +42,18 @@
 
                     $i = 1; while ($row = mysqli_fetch_array($list)) { ?>
                     <tr>
-                        <td> <?php echo $i; ?> </td>
-
                         <!--task printing-->
+                        <td> <?php echo $i; ?> </td>
                         <td class="task"> <?php echo $row['task']; ?> </td>
 
                         <!--Edit button-->
-                        <td> 
-                            <a href="update.php?edit_task=<?php echo $row['id'] ?>" >
-                            <button type="submit" name="submit" id="add_btn" class="add_btn"> Edit </button> </a> 
+                        <td class="edit"> 
+                            <a href="index.php?edit=<?php echo $row['id'] ?>"> Edit </a> 
                         </td>
-                        
+
                         <!--Delete button-->
-                        <td> 
-                            <a href="index.php?del_task=<?php echo $row['id'] ?>"> 
-                            <button type="submit" name="submit" id="add_btn" class="add_btn"> Delete </button> </a> 
+                        <td class="delete"> 
+                            <a href="index.php?del=<?php echo $row['id'] ?>"> Delete </a> 
                         </td>
                     </tr>
                 <?php $i++; } ?>	
