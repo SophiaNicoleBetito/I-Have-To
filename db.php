@@ -7,8 +7,9 @@
     $userName = "root";
     $password = "";
     $db = "todo";
-
     $con = mysqli_connect($serverName, $userName, $password, $db);
+	
+	$id = 0;
 	$update = FALSE;
     $task = "";
 
@@ -18,7 +19,7 @@
         exit();
     }
 
-	// insert a quote if submit button is clicked
+	// if submit button is clicked, data inputted will be saved in the database
 	if (isset($_POST['submit'])) {
 		if (empty($_POST['task'])) {
 			$errors = "You must fill in the task";
@@ -44,9 +45,18 @@
 		$update = TRUE;
         $result = mysqli_query($con, "SELECT * FROM list WHERE id=$id");
 		
-		
 		$row = $result -> fetch_array();
 		$task = $row['task'];
-
     }
+
+	//updating the databse with the edited task
+	if (isset($_POST['update'])) {
+		$id = $_POST['id'];
+		$task = $_POST['task'];
+
+		mysqli_query($con, "UPDATE list SET task = '$task' WHERE id = '$id'")
+			or die (mysqli->error);
+		
+		header('location: index.php');
+	}
 ?>

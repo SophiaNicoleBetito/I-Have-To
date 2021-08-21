@@ -1,39 +1,54 @@
 .heading{
-	width: 50%;
-	margin: 30px auto;
+	width: 50%; 
+	margin: 5px auto; 
 	text-align: center;
-	color: 	#6B8E23;
-	background: #FFF8DC;
-	border: 2px solid #6B8E23;
-	border-radius: 20px;
+}
+
+body {
+	background-image: url('84248.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 }
 
 form {
-	width: 50%; 
+	width: 60%; 
 	margin: 30px auto; 
-	border-radius: 5px; 
-	padding: 10px;
-	background: #FFF8DC;
-	border: 1px solid #6B8E23;
-}
-
-form p {
-	color: red;
-	margin: 0px;
+	border-radius: 6px; 
+	padding: 20px;
+	text-align: center;
 }
 
 .task_input {
-	width: 75%;
-	height: 15px; 
+	width: 73%;
+	height: 20px; 
 	padding: 10px;
-	border: 2px solid #6B8E23;
+	border: 2px solid #89f80a;
 }
 
 .add_btn {
+	height: 45px;
+	background: #1ef702fd;
+	color: 	#000000;
+	border: 2px solid #1ef702fd;
+	border-radius: 5px; 
+	padding: 5px 20px;
+}
+
+.edit_btn {
 	height: 39px;
-	background: #FFF8DC;
-	color: 	#6B8E23;
-	border: 2px solid #6B8E23;
+	background: #2b72b4;
+	color: 	#ffffff;
+	border: 2px solid #2b72b4;
+	border-radius: 5px; 
+	padding: 7px 30px;
+}
+
+.del_btn {
+	height: 39px;
+	background: #f50303;
+	color: 	#ffffff;
+	border: 2px solid #f50303;
 	border-radius: 5px; 
 	padding: 5px 20px;
 }
@@ -42,21 +57,25 @@ table {
     width: 50%;
     margin: 30px auto;
     border-collapse: collapse;
+	text-align: center;
+	background-color: #ffffff8e;
 }
 
 tr {
 	border-bottom: 1px solid #cbcbcb;
+	text-align: center;
 }
 
 th {
 	font-size: 19px;
-	color: #6B8E23;
+	color: #000000;
 }
 
 th, td{
 	border: none;
     height: 30px;
     padding: 2px;
+	text-align: center;
 }
 
 tr:hover {
@@ -66,15 +85,3 @@ tr:hover {
 .task {
 	text-align: left;
 }
-
-.delete{
-	text-align: center;
-}
-.delete a{
-	color: white;
-	background: #a52a2a;
-	padding: 1px 6px;
-	border-radius: 3px;
-	text-decoration: none;
-}
-
